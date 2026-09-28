@@ -1,0 +1,11 @@
+package com.appexercise.MovieUniverseHub.repository;
+
+import com.appexercise.MovieUniverseHub.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface MovieListRepository extends JpaRepository<User, Integer> {
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String email);
+}
