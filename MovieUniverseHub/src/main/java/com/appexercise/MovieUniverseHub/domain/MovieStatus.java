@@ -1,7 +1,8 @@
 package com.appexercise.MovieUniverseHub.domain;
 
-public enum watchedMovie {
+public enum MovieStatus {
     tobeWatched,
     incomplete,
-    complete
+    complete,
+    favorite
 }

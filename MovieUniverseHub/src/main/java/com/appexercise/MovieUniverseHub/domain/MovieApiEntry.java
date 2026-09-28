@@ -3,52 +3,49 @@ package com.appexercise.MovieUniverseHub.domain;
 import jakarta.persistence.*;
 
 @Entity
-public class Movie {
+public class MovieApiEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String movieName;
-    private int userScore;
-    private MovieStatus movieStatus;
+    private Long apiId;
+    private String title;
+    private String poster_path;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    public Movie() {}
-    public Movie(String movieName) {
-        if (movieName == null) {
-            throw new IllegalArgumentException("Name is required");
-        }
-        this.movieName = movieName;
+    public MovieApiEntry() {}
+    public MovieApiEntry(Long apiId,
+                         String title,
+                         String poster_path) {
+        this.apiId = apiId;
+        this.title = title;
+        this.poster_path = poster_path;
     }
 
     /*Getters*/
     public int getId() {
         return id;
     }
-    public String getMovieName() {
-        return movieName;
+    public Long getApiId() {
+        return apiId;
     }
-    public int getUserScore() {
-        return userScore;
+    public String getTitle() {
+        return title;
     }
-    public MovieStatus getMovieStatus() {
-        return movieStatus;
+    public String getPoster_path() {
+        return poster_path;
     }
 
     /*Setters*/
     public void setId(int id) {
         this.id = id;
     }
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
+    public void setApiId(Long apiId) {
+        this.apiId = apiId;
     }
-    public void setUserScore(int userScore) {
-        this.userScore = userScore;
+    public void setTitle(String title) {
+        this.title = title;
     }
-    public void setMovieStatus(MovieStatus movieStatus) {
-        this.movieStatus = movieStatus;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 }

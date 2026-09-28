@@ -1,40 +1,21 @@
 package com.appexercise.MovieUniverseHub.service;
 
-import com.appexercise.MovieUniverseHub.domain.User;
-import com.appexercise.MovieUniverseHub.repository.UserRepository;
+import com.appexercise.MovieUniverseHub.domain.Movie;
+import com.appexercise.MovieUniverseHub.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-public class UserService {
-    private final UserRepository userRepository;
+@Service
+public class MovieService {
+    private final MovieRepository movieRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
-
-    /* register - Registers a new user, if username is free */
-    public User register(String username, String email, String password) {
-        if (userRepository.findByUsername(username).isPresent()) {
-            throw new IllegalArgumentException("username already exists");
-        }
-
-        User user = new User(username, email, password);
-        return userRepository.save(user);
-    }
-
-    /* login - Logins a user, if user exists and password matches */
-    public Optional<User> login(String email, String password) {
-        Optional<User> user = userRepository.findByUsername(email);
-        if (user.isPresent()) {
-            if (user.get().getPassword().equals(password)) {
-                return user;
-            }
-        }
-        return Optional.empty();
+    public Optional<Movie> findByName(String movieName) {
+        return movieRepository.findByMovieName(movieName);
     }
 }

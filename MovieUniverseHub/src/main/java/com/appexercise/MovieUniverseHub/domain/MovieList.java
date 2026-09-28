@@ -2,53 +2,59 @@ package com.appexercise.MovieUniverseHub.domain;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
-public class User {
+public class MovieList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(unique=true)
-    private String username;
-    private String password;
-    @Column(unique=true)
-    private String email;
+    private String name;
 
-    public User() {}
-    public User(String username, String password, String email) {
-        if (username == null || password == null || email == null) {
-            throw new IllegalArgumentException("Username, email and/or password are required");
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+    @ManyToMany
+    private Set<Movie> movies;
+
+    public MovieList() {}
+    public MovieList(String name, User user) {
+        if (name == null || user == null) {
+            throw new IllegalArgumentException("Name and user are required");
         }
-        this.username = username;
-        this.password = password;
-        this.email = email;
+        this.name = name;
+        this.user = user;
     }
 
     /*Getters*/
     public int getId() {
         return id;
     }
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
-    public String getPassword() {
-        return password;
+    public User getUser() {
+        return user;
     }
-    public String getEmail() {
-        return email;
+    public Set<Movie> getMovies() {
+        return movies;
     }
 
     /*Setters*/
     public void setId(int id) {
         this.id = id;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String name) {
+        this.name = name;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUser(User user) {
+        this.user = user;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
+    public void addMovie(Movie movie) {
+        this.movies.add(movie);
     }
 }
